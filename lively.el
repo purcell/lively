@@ -15,7 +15,9 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;; Version: 0.1
+;; Author: Luke Gorrie <luke@bup.co.nz>
+;; Maintainer: Steve Purcell <steve@sanityinc.com>
+;; Package-Version: 0
 
 ;;; Commentary:
 ;;
@@ -26,14 +28,12 @@
 ;;   Unix processes:    (lively-shell-command "ps -a | wc -l")
 ;;
 ;; then the code will be replaced by its formatted result -- and
-;; periodically updated. You can create little dashboards.
+;; periodically updated.  You can create little dashboards.
 ;; Use `M-x lively-stop' to restore order.
 ;;
 ;; Based on the Squeak hack by Scott Wallace.
 
 ;;; Code:
-
-(require 'cl)
 
 (defvar lively-overlays nil  "List of all overlays representing lively text.")
 (defvar lively-timer    nil  "Idle timer for updating lively text.")
@@ -45,7 +45,7 @@
   (lively-region (save-excursion (backward-sexp) (point)) (point)))
 
 (defun lively-region (start end)
-  "Make the region lively."
+  "Make the region from START to END lively."
   (interactive "r")
   (when (null lively-timer)
     (lively-init-timer))
@@ -62,6 +62,7 @@
                (lively-delete-overlay o))))))
 
 (defun lively-delete-overlay (o)
+  "Delete overlay O."
   (delete-overlay o)
   (setq lively-overlays (remove o lively-overlays)))
 
