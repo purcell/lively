@@ -39,11 +39,13 @@
 (defvar lively-timer    nil  "Idle timer for updating lively text.")
 (defvar lively-interval 0.25 "Idle time before lively text update in seconds.")
 
+;;;###autoload
 (defun lively ()
   "Make the expression before point lively."
   (interactive)
   (lively-region (save-excursion (backward-sexp) (point)) (point)))
 
+;;;###autoload
 (defun lively-region (start end)
   "Make the region from START to END lively."
   (interactive "r")
